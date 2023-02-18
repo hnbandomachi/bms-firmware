@@ -118,12 +118,12 @@ int bms_init_hardware(Bms *bms)
 
 void bms_update(Bms *bms)
 {
-    bms_read_voltages(bms);
-    bms_read_current(bms);
-    bms_soc_update(bms);
-    bms_read_temperatures(bms);
-    bms_update_error_flags(bms);
-    bms_update_balancing(bms);
+    bms_read_voltages(bms);         // 32 bits, float pack_voltage        
+    bms_read_current(bms);          // 32 bits, float pack_current
+    bms_soc_update(bms);            // 32 bits, float soc; ///< Calculated State of Charge (%)
+    bms_read_temperatures(bms);     // 32 bits, float bat_temp_avg; ///< Average battery temperature (°C)
+    bms_update_error_flags(bms);    // 32 bits, uint32_t error_flags; ///< Bit array for different BmsErrorFlag errors
+    bms_update_balancing(bms);      // 32 bits, uint32_t balancing_status; ///< holds on/off status of balancing switches
 }
 
 bool bms_startup_inhibit()
